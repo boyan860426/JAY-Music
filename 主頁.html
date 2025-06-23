@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="./JayChou/img/J-icon.png" type="image/png">
+    <title>老周寶</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        .custom-navbar {
+            background-color: black;
+            padding: 5px 5px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .custom-navbar .navbar-brand img {
+            height: 60px;
+        }
+
+        .custom-navbar .nav-link {
+            color: white;
+            font-size: 20px;
+            margin-right: 15px;
+        }
+
+        .custom-navbar .nav-link:hover {
+            color: #9D9D9D;
+        }
+
+        i {
+            color: white;
+            padding: 20px;
+            font-size: 30px;
+        }
+
+        .bi-youtube:hover {
+            color: red;
+        }
+
+        .bi-instagram:hover {
+            color: #FF359A;
+        }
+
+        .bi-facebook:hover {
+            color: #0072E3;
+        }
+
+        .carousel-container {
+            width: 80%;
+            /* 設定寬度 */
+            max-width: 950px;
+            /* 避免過寬 */
+            padding: 10px;
+            /* 內邊距，讓框框內的內容不貼邊 */
+            border: 2px solid gray;
+            /* 外框顏色 */
+            border-radius: 10px;
+            /* 圓角 */
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+            /* 添加陰影 */
+            background-color: white;
+            /* 設定背景色 */
+        }
+
+        .carousel-inner img {
+            height: 700px;
+            /* 設定統一高度 */
+            object-fit: cover;
+            /* 確保圖片填滿不變形 */
+        }
+
+        @media (max-width: 768px) {
+            .carousel-container {
+                width: 95%;
+                /* 在小螢幕時縮小 */
+                max-width: 600px;
+            }
+
+            .carousel-inner img {
+                height: 300px;
+                /* 在手機上圖片高度縮小*/
+            }
+        }
+
+        .search-container {
+            position: relative;
+            width: 300px;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        .results {
+            position: absolute;
+            width: 100%;
+            background: white;
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .results div {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .results div:hover {
+            background: #f0f0f0;
+        }
+
+        .banner{
+            width: 100%;
+            height: 700px;
+            background: 
+                linear-gradient(120deg, #18191A 50%, transparent 50%)
+                center center / 100% 100%,
+                url(./JayChou/img/Carousel/Jay01.jpg) right center / 100% 100%;
+                
+                background-size: contain;
+        }
+
+        .banner1{
+            width: 100%;
+            height: 700px;
+            background: 
+                linear-gradient(-120deg, #18191A 50%, transparent 50%)
+                center center / 100% 100%,
+                url(./JayChou/img/Carousel/Jay02.jpg) left center / auto 100%;
+        }
+
+        .banner2{
+            width: 100%;
+            height: 700px;
+            background: 
+                linear-gradient(120deg, #18191A 50%, transparent 50%)
+                center center / 100% 100%,
+                url(./JayChou/img/Carousel/Jay05.jpg) right center / 100% 100%;
+                
+                background-size: contain;
+        }
+
+        .container{
+            width: 1200px;
+            margin: auto;
+            height: 100%;
+        }
+        .banner-txt{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .banner-txt h1{
+            font-size: 60px;
+            border-bottom: 1px solid #333;
+            font-weight: 900;
+        }
+        .banner-txt h1 small{
+            display: block;
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .banner-txt h2{
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .banner-txt p{
+            font-size: 30px;
+            font-weight: 300;
+        }
+
+        .banner-txt1{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        .banner-txt1 h1{
+            font-size: 50px;
+            border-bottom: 1px solid #333;
+            font-weight: 900;
+        }
+        .banner-txt1 h1 small{
+            display: block;
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .banner-txt1 h2{
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .banner-txt1 p{
+            font-size: 30px;
+            font-weight: 300;
+        }
+
+        .banner-txt2{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .banner-txt2 h1{
+            font-size: 50px;
+            border-bottom: 1px solid #333;
+            font-weight: 900;
+        }
+        .banner-txt2 h1 small{
+            display: block;
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .banner-txt2 h2{
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .banner-txt2 p{
+            font-size: 30px;
+            font-weight: 300;
+        }
+        
+    </style>
+
+</head>
+
+<body class="bg-light" style="padding-top: 80px;">
+
+
+
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container-fluid">
+            <!-- 左邊 Logo -->
+            <a class="navbar-brand" href="./主頁.html">
+                <img src="./JayChou/img/JaychouLogo.jpg" alt="Logo">
+            </a>
+
+            <!-- 響應式按鈕 -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- 導覽列選單 -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./關於周杰倫.html">關於周杰倫</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./專輯總覽.html">專輯總覽</a>
+                    </li>
+                </ul>
+
+                <div class="search-container" style="margin-right: 20px;">
+                    <input type="text" id="searchInput" placeholder="搜尋歌曲..." style="border-radius: 20px;">
+                    <div class="results" id="results"></div>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <a href="https://www.youtube.com/@jaychou/videos"><i class="bi bi-youtube"></i></a>
+                    <a href="https://www.instagram.com/jaychou/"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.facebook.com/jay/?locale=zh_TW"><i class="bi bi-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="banner">
+        <div class="container">
+            <div class="banner-txt">
+                <h1 style="color: white;">
+                    周杰倫的音樂世界
+                    <small>
+                        
+                    </small>
+                </h1>
+                <h2 style="color: white;">不只是歌手，更是傳奇</h2>
+                <p>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="banner1">
+        <div class="container">
+            <div class="banner-txt1">
+                <h1 style="color: white;">
+                    「聽見」周杰倫的時代
+                    <small>
+                        
+                    </small>
+                </h1>
+                <h2 style="color: white;">回憶滿滿！</h2>
+                <p>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="banner2">
+        <div class="container">
+            <div class="banner-txt2">
+                <h1 style="color: white;">
+                    你心目中的周董「神曲」
+                    <small>
+                        
+                    </small>
+                </h1>
+                <h2 style="color: white;">是哪一首？</h2>
+                <p>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 回到頂部按鈕 -->
+    <button onclick="scrollToTop()" id="scrollTopBtn" class="btn position-fixed bottom-0 end-0 m-4"
+        style="display: none; z-index: 999; background-color: #000; color: #fff; border: none; padding: 1px 1px;  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); font-size: 10px; opacity: 0.6;">
+        <i class="bi bi-arrow-up-circle" style="color: #fff;"></i>
+    </button>
+
+    <script>
+        // 監聽滾動事件，控制按鈕顯示與否
+        window.onscroll = function () {
+            let btn = document.getElementById("scrollTopBtn");
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+
+        // 點擊按鈕時滾回頂部
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <script src="./test.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

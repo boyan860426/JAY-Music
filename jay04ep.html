@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="./JayChou/img/J-icon.png" type="image/png">
+    <title>老周寶-尋找周杰倫</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        .custom-navbar {
+            background-color: black;
+            padding: 5px 5px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .custom-navbar .navbar-brand img {
+            height: 60px;
+        }
+
+        .custom-navbar .nav-link {
+            color: white;
+            font-size: 20px;
+            margin-right: 15px;
+        }
+
+        .custom-navbar .nav-link:hover {
+            color: #9D9D9D;
+        }
+
+        i {
+            color: white;
+            padding: 20px;
+            font-size: 30px;
+        }
+
+        .bi-youtube:hover {
+            color: red;
+        }
+
+        .bi-instagram:hover {
+            color: #FF359A;
+        }
+
+        .bi-facebook:hover {
+            color: #0072E3;
+        }
+
+        .carousel-container {
+            width: 80%;
+            /* 設定寬度 */
+            max-width: 950px;
+            /* 避免過寬 */
+            padding: 10px;
+            /* 內邊距，讓框框內的內容不貼邊 */
+            border: 2px solid gray;
+            /* 外框顏色 */
+            border-radius: 10px;
+            /* 圓角 */
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+            /* 添加陰影 */
+            background-color: white;
+            /* 設定背景色 */
+        }
+
+        .carousel-inner img {
+            height: 700px;
+            /* 設定統一高度 */
+            object-fit: cover;
+            /* 確保圖片填滿不變形 */
+        }
+
+        @media (max-width: 768px) {
+            .carousel-container {
+                width: 95%;
+                /* 在小螢幕時縮小 */
+                max-width: 600px;
+            }
+
+            .carousel-inner img {
+                height: 300px;
+                /* 在手機上圖片高度縮小*/
+            }
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            /* 左右區塊分開，中間區塊居中 */
+        }
+
+        .left,
+        .center,
+        .right {
+            padding: 10px;
+            /* border: 1px solid #000; */
+        }
+
+        .left {
+            width: 30%;
+
+            /* 左邊區塊佔 30% */
+        }
+
+        .center {
+            width: 40%;
+            /* 中間區塊佔 40% */
+        }
+
+        .right {
+            width: 30%;
+            /* 右邊區塊佔 30% */
+        }
+
+        #lyrics-container {
+            text-align: center;
+            font-size: 21px;
+            line-height: 1.5;
+            cursor: pointer;
+
+        }
+
+        .lyric-line:hover {
+            background-color: #F0F0F0;
+        }
+
+        .lyric-line {
+            color: black;
+            /* transition: color 0.3s; */
+        }
+
+        .highlight {
+            color: blue;
+            font-weight: bold;
+            background-color: #F0F0F0;
+            transition: color 0.1s;
+        }
+
+        .active::before {
+            content: " ♫ ";
+        }
+
+        .search-container {
+            position: relative;
+            width: 300px;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        .results {
+            position: absolute;
+            width: 100%;
+            background: white;
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .results div {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .results div:hover {
+            background: #f0f0f0;
+        }
+
+        a {
+            color: #000;
+            text-decoration: none;
+            /* 移除底線 */
+
+        }
+
+        .songlist:hover {
+            background-color: #F0F0F0;
+        }
+
+        .lyric-line {
+            cursor: pointer;
+            transition: color 0.1s;
+        }
+
+        .active {
+            color: blue;
+            font-weight: bold;
+            background-color: #F0F0F0;
+        }
+
+        .fixed-audio-player {
+            position: fixed;
+            bottom: 0;
+            width: 50%;            
+            padding: 10px 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            max-width: 500px;
+        }
+    </style>
+
+</head>
+
+<body class="bg-light" style="padding-top: 80px;">
+
+
+
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container-fluid">
+            <!-- 左邊 Logo -->
+            <a class="navbar-brand" href="./主頁.html">
+                <img src="./JayChou/img/JaychouLogo.jpg" alt="Logo">
+            </a>
+
+            <!-- 響應式按鈕 -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- 導覽列選單 -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./關於周杰倫.html">關於周杰倫</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./專輯總覽.html">專輯總覽</a>
+                    </li>
+                </ul>
+                <div class="search-container" style="margin-right: 20px;">
+                    <input type="text" id="searchInput" placeholder="搜尋歌曲..." style="border-radius: 20px;">
+                    <div class="results" id="results"></div>
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="https://www.youtube.com/@jaychou/videos"><i class="bi bi-youtube"></i></a>
+                    <a href="https://www.instagram.com/jaychou/"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.facebook.com/jay/?locale=zh_TW"><i class="bi bi-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="left" style="margin-top: 50px;">
+            <div style="position: fixed;">
+                <img src="./JayChou/04EP_尋找周杰倫/04EP_尋找周杰倫.jpg" style="width: 200px;">
+                <h3 style="text-align: center;">尋找周杰倫</h3>
+                <h6 style="text-align: center;">2003年11月11日</h6>
+                <h5 style="text-align: center;">專輯曲目</h5>
+                <ul style="list-style-type: none;">
+                    <li class="songlist"><a href="jay04ep.html?songId=04ep01">01.軌跡</a></li>
+                    <li class="songlist"><a href="jay04ep.html?songId=04ep02">02.斷了的弦</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="center" style="margin-top: 80px; background-color: white">
+            <div style="text-align: center;">
+                <img src="./JayChou/04EP_尋找周杰倫/04EP_尋找周杰倫.jpg" style="width: 400px;">
+                <audio id="audio-player" controls class="fixed-audio-player">
+                    <source id="audio-source" src="" type="audio/mp3">
+                    您的瀏覽器不支援音訊播放。
+                </audio>
+                <h3 id="song-title"></h3>
+                <hr>
+            </div>
+            <div id="lyrics-container"></div>
+            <hr>
+        </div>
+        <div class="right" style="margin-top: 80px;"></div>
+    </div>
+
+
+    <script>
+
+
+
+        // 模擬歌曲資料庫
+        const songs = {
+            "04ep01": {
+                title: "01.軌跡",
+                url: "./JayChou/04EP_尋找周杰倫/01_軌跡.mp3",
+                lyrics: `
+                    [00:00.21]作詞：黃俊郎 ｜ 作曲：周杰倫
+                    [00:19.10]怎麼隱藏我的悲傷
+                    [00:25.43]失去妳的地方
+                    [00:31.82]妳的髮香
+                    [00:35.01]散的匆忙
+                    [00:38.25]我已經跟不上
+                    [00:44.65]閉上眼睛 還能看見
+                    [00:51.04]妳離去的痕跡
+                    [00:57.37]在月光下一直找尋
+                    [01:03.76]那想念的身影
+                    [01:10.45]如果說分手是苦痛的起點
+                    [01:16.03]那在終點之前我願意再愛一遍
+                    [01:23.22]想要對妳說的不敢說的愛
+                    [01:29.62]會不會有人可以明白
+                    [01:35.76]我會發著呆 然後忘記妳
+                    [01:42.14]接著緊緊閉上眼
+                    [01:48.53]想著哪一天 會有人代替
+                    [01:55.19]讓我不再想念妳
+                    [02:01.29]我會發著呆 然後微微笑
+                    [02:07.67]接著緊緊閉上眼
+                    [02:14.05]又想了一遍 妳溫柔的臉
+                    [02:20.70]在我忘記之前
+                    [02:27.34]～ 間奏 ～
+                    [02:41.10]閉上眼睛 還能看見
+                    [02:47.69]妳離去的痕跡
+                    [02:53.80]在月光下一直找尋
+                    [03:00.18]那想念的身影
+                    [03:07.11]如果說分手是苦痛的起點
+                    [03:12.69]那在終點之前我願意再愛一遍
+                    [03:19.88]想要對妳說的不敢說的愛
+                    [03:26.28]會不會有人可以明白
+                    [03:32.13]我會發著呆 然後忘記妳
+                    [03:38.51]接著緊緊閉上眼
+                    [03:44.89]想著哪一天 會有人代替
+                    [03:51.82]讓我不再想念妳
+                    [04:01.62]我會發著呆 然後忘記妳
+                    [04:09.08]接著緊緊閉上眼
+                    [04:15.19]想著哪一天 會有人代替
+                    [04:22.12]讓我不再想念妳
+                    [04:28.00]我會發著呆 然後微微笑
+                    [04:34.40]接著緊緊閉上眼
+                    [04:40.82]又想了一遍 妳溫柔的臉
+                    [04:47.51]在我忘記之前
+                    [04:53.65]心裡的眼淚 模糊了視線
+                    [05:00.30]妳已快看不見
+                    [05:10.95]
+                `
+                     },
+
+            "04ep02": {
+                title: "02.斷了的弦",
+                url: "./JayChou/04EP_尋找周杰倫/02_斷了的弦.mp3",
+                lyrics: `
+                    [00:00.21]作詞：方文山 ｜ 作曲：周杰倫
+                    [00:18.31]斷了的弦 再怎麼練
+                    [00:23.11]我的感覺 妳已聽不見
+                    [00:28.41]妳的轉變 像斷掉的線
+                    [00:33.20]再怎麼接 音都不對
+                    [00:36.64]妳的改變我能夠分辨
+                    [00:40.37]我沉默 妳的話也不多
+                    [00:44.32]我們之間少了什麼 不說 哎喲
+                    [00:49.64]微笑後 表情終於有點難過
+                    [00:53.35]握著你的手
+                    [00:54.15]問妳 確定了再走
+                    [00:59.45]我突然釋懷的笑
+                    [01:01.85]笑聲盤旋半山腰
+                    [01:04.50]隨風在飄搖啊搖
+                    [01:06.89]來到妳的面前繞
+                    [01:09.29]妳淚水往下的掉
+                    [01:11.95]說會記住我的好
+                    [01:14.33]我也彎起了嘴角笑
+                    [01:19.37]妳的美 已經給了誰
+                    [01:23.62]追了又追 我要不回
+                    [01:29.16]我了解 離開樹的葉
+                    [01:33.69]屬於地上的世界 凋謝
+                    [01:40.09]斷了的弦 再彈一遍
+                    [01:44.86]我的世界 妳不在裡面
+                    [01:49.91]我的指尖 已經彈出繭
+                    [01:54.69]還是無法留妳在我身邊
+                    [01:59.74]斷了的弦 再怎麼練
+                    [02:04.80]我的感覺 妳已聽不見
+                    [02:09.84]妳的轉變 像斷掉的線
+                    [02:14.61]再怎麼接 音都不對
+                    [02:18.07]妳的改變我能夠分辨
+                    [02:21.79]～ 間奏 ～
+                    [02:31.64]我沉默 妳的話也不多
+                    [02:35.63]我們之間少了什麼 不說 哎喲
+                    [02:40.93]微笑後 表情終於有點難過
+                    [02:44.66]握著你的手
+                    [02:45.44]問妳 確定了再走
+                    [02:50.77]我突然釋懷的笑
+                    [02:53.16]笑聲盤旋半山腰
+                    [02:55.81]隨風在飄搖啊搖
+                    [02:58.20]來到妳的面前繞
+                    [03:00.86]妳淚水往下的掉
+                    [03:03.25]說會記住我的好
+                    [03:05.64]我也彎起了嘴角笑
+                    [03:10.68]妳的美 已經給了誰
+                    [03:14.93]追了又追 我要不回
+                    [03:20.51]我了解 離開樹的葉
+                    [03:24.77]屬於地上的世界 凋謝
+                    [03:31.41]斷了的弦 再彈一遍
+                    [03:36.19]我的世界 妳不在裡面
+                    [03:41.24]我的指尖 已經彈出繭
+                    [03:46.02]還是無法留妳在我身邊
+                    [03:51.08]斷了的弦 再怎麼練
+                    [03:56.14]我的感覺 妳已聽不見
+                    [04:00.93]妳的轉變 像斷掉的線
+                    [04:05.98]再怎麼接 音都不對
+                    [04:09.43]妳的改變我能夠分辨
+                    [04:14.75]
+                ` }
+
+            
+        };
+
+        // 取得網址參數
+        const params = new URLSearchParams(window.location.search);
+        const songId = params.get("songId");
+        const audioPlayer = document.getElementById("audio-player");
+        const lyricsContainer = document.getElementById("lyrics-container");
+
+        if (songId && songs[songId]) {
+            document.getElementById("song-title").textContent = songs[songId].title;
+            document.getElementById("audio-source").src = songs[songId].url;
+            document.getElementById("audio-player").load(); // 重新載入音樂
+
+            // 解析 LRC 歌詞
+            const lyricsText = songs[songId].lyrics.trim();
+            const lyricsArray = parseLRC(lyricsText);
+
+            // 顯示歌詞
+            lyricsArray.forEach((line, index) => {
+                const lyricLine = document.createElement("p");
+                lyricLine.textContent = line.text;
+                lyricLine.classList.add("lyric-line");
+                lyricLine.setAttribute("data-time", line.time); // 記錄時間
+
+                // 點擊歌詞跳轉 & 自動播放
+                lyricLine.onclick = () => {
+                    const targetTime = line.time; // 記錄要跳轉的時間
+                    audioPlayer.removeEventListener("timeupdate", onTimeUpdate); // 先停用時間監聽
+
+                    audioPlayer.currentTime = targetTime; // 直接設定時間
+                    updateLyricsHighlight(targetTime, lyricsArray); // 立即手動更新歌詞
+
+                    if (audioPlayer.paused) {
+                        audioPlayer.play(); // 如果音樂暫停，則播放
+                    }
+
+                    // 強制延遲 700ms 再恢復 `timeupdate` 監聽
+                    setTimeout(() => {
+                        audioPlayer.addEventListener("timeupdate", onTimeUpdate);
+                    }, 700);
+                };
+
+                lyricsContainer.appendChild(lyricLine);
+            });
+
+            // 監聽音樂時間，動態高亮顯示歌詞
+            audioPlayer.addEventListener("timeupdate", () => {
+                updateLyricsHighlight(audioPlayer.currentTime, lyricsArray);
+            });
+        } else {
+            document.body.innerHTML = "<h1>歌曲不存在</h1>";
+        }
+
+        // 解析 LRC 歌詞函數
+        function parseLRC(lrc) {
+            const lines = lrc.split("\n");
+            const lyricsArray = [];
+
+            lines.forEach(line => {
+                const match = line.match(/\[(\d+):(\d+\.\d+)\](.*)/);
+                if (match) {
+                    const minutes = parseInt(match[1]);
+                    const seconds = parseFloat(match[2]);
+                    const time = minutes * 60 + seconds; // 轉換成秒
+                    const text = match[3].trim(); // 歌詞文字
+                    lyricsArray.push({ time, text });
+                }
+            });
+
+            return lyricsArray;
+        }
+
+        // 更新歌詞高亮
+        function updateLyricsHighlight(currentTime, lyricsArray) {
+            let activeIndex = -1;
+
+            // 找出最接近當前時間的歌詞
+            for (let i = 0; i < lyricsArray.length; i++) {
+                if (currentTime >= lyricsArray[i].time - 0.2) { // 多加 0.2 秒的誤差容忍
+                    activeIndex = i;
+                } else {
+                    break;
+                }
+            }
+
+            // 更新高亮顯示
+            document.querySelectorAll(".lyric-line").forEach((line, index) => {
+                if (index === activeIndex) {
+                    line.classList.add("active");
+                } else {
+                    line.classList.remove("active");
+                }
+            });
+        }
+
+        function onTimeUpdate() {
+            updateLyricsHighlight(audioPlayer.currentTime, lyricsArray);
+        }
+
+        audioPlayer.addEventListener("timeupdate", onTimeUpdate);
+
+        // 監聽歌曲播放結束事件，清除所有高亮歌詞
+        audioPlayer.addEventListener("ended", () => {
+            document.querySelectorAll(".lyric-line").forEach(line => {
+                line.classList.remove("active"); // 移除所有高亮
+            });
+        });
+    </script>
+
+    <!-- 回到頂部按鈕 -->
+    <button onclick="scrollToTop()" id="scrollTopBtn" class="btn position-fixed bottom-0 end-0 m-4"
+        style="display: none; z-index: 999; background-color: #000; color: #fff; border: none; padding: 1px 1px;  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); font-size: 10px; opacity: 0.6;">
+        <i class="bi bi-arrow-up-circle" style="color: #fff;"></i>
+    </button>
+
+    <script>
+        // 監聽滾動事件，控制按鈕顯示與否
+        window.onscroll = function () {
+            let btn = document.getElementById("scrollTopBtn");
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+
+        // 點擊按鈕時滾回頂部
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+    <script src="./test.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

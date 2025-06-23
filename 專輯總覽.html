@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./JayChou/img/J-icon.png" type="image/png">
+    <title>老周寶-專輯總覽</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        .custom-navbar {
+            background-color: black;
+            padding: 5px 5px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .custom-navbar .navbar-brand img {
+            height: 60px;
+        }
+
+        .custom-navbar .nav-link {
+            color: white;
+            font-size: 20px;
+            margin-right: 15px;
+        }
+
+        .custom-navbar .nav-link:hover {
+            color: #9D9D9D;
+        }
+
+        i {
+            color: white;
+            padding: 20px;
+            font-size: 30px;
+        }
+
+        .bi-youtube:hover {
+            color: red;
+        }
+
+        .bi-instagram:hover {
+            color: #FF359A;
+        }
+
+        .bi-facebook:hover {
+            color: #0072E3;
+        }
+
+        .carousel-container {
+            width: 80%;
+            /* 設定寬度 */
+            max-width: 950px;
+            /* 避免過寬 */
+            padding: 10px;
+            /* 內邊距，讓框框內的內容不貼邊 */
+            border: 2px solid gray;
+            /* 外框顏色 */
+            border-radius: 10px;
+            /* 圓角 */
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+            /* 添加陰影 */
+            background-color: white;
+            /* 設定背景色 */
+        }
+
+        .carousel-inner img {
+            height: 700px;
+            /* 設定統一高度 */
+            object-fit: cover;
+            /* 確保圖片填滿不變形 */
+        }
+
+        @media (max-width: 768px) {
+            .carousel-container {
+                width: 95%;
+                /* 在小螢幕時縮小 */
+                max-width: 600px;
+            }
+
+            .carousel-inner img {
+                height: 300px;
+                /* 在手機上圖片高度縮小*/
+            }
+        }
+
+        /* .card-img-top {
+            height: 230px;
+            你可以根據需求調整
+            object-fit: contain;
+        } */
+
+        .search-container {
+            position: relative;
+            width: 300px;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        .results {
+            position: absolute;
+            width: 100%;
+            background: white;
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .results div {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .results div:hover {
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+
+<!-- background-color: #18191A; -->
+
+<body class="bg-light" style="padding-top: 80px;">
+
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container-fluid">
+            <!-- 左邊 Logo -->
+            <a class="navbar-brand" href="./主頁.html">
+                <img src="./JayChou/img/JaychouLogo.jpg" alt="Logo">
+            </a>
+
+            <!-- 響應式按鈕 -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- 導覽列選單 -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./關於周杰倫.html">關於周杰倫</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./專輯總覽.html">專輯總覽</a>
+                    </li>
+                </ul>
+                <div class="search-container" style="margin-right: 20px;">
+                    <input type="text" id="searchInput" placeholder="搜尋歌曲..." style="border-radius: 20px;">
+                    <div class="results" id="results"></div>
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="https://www.youtube.com/@jaychou/videos"><i class="bi bi-youtube"></i></a>
+                    <a href="https://www.instagram.com/jaychou/"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.facebook.com/jay/?locale=zh_TW"><i class="bi bi-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+        <div class="row g-3">
+            <!-- 專輯卡片 -->
+            <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card">
+                    <img src="./JayChou/01_Jay/01_Jay.jpg" class="card-img-top" alt="Jay">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">Jay</h3>
+                        <div class="list-group">
+                            <a href="jay01.html?songId=0101" class="list-group-item list-group-item-action">01.可愛女人</a>
+                            <a href="jay01.html?songId=0102" class="list-group-item list-group-item-action">02.完美主義</a>
+                            <a href="jay01.html?songId=0103" class="list-group-item list-group-item-action">03.星晴</a>
+                            <a href="jay01.html?songId=0104" class="list-group-item list-group-item-action">04.娘子</a>
+                            <a href="jay01.html?songId=0105" class="list-group-item list-group-item-action">05.鬥牛</a>
+                            <a href="jay01.html?songId=0106" class="list-group-item list-group-item-action">06.黑色幽默</a>
+                            <a href="jay01.html?songId=0107" class="list-group-item list-group-item-action">07.伊斯坦堡</a>
+                            <a href="jay01.html?songId=0108"
+                                class="list-group-item list-group-item-action">08.印地安老斑鳩</a>
+                            <a href="jay01.html?songId=0109" class="list-group-item list-group-item-action">09.龍捲風</a>
+                            <a href="jay01.html?songId=0110" class="list-group-item list-group-item-action">10.反方向的鐘</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card">
+                    <img src="./JayChou/02_范特西/02_范特西.jpg" class="card-img-top" alt="范特西">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">范特西</h3>
+                        <div class="list-group">
+                            <a href="jay02.html?songId=0201" class="list-group-item list-group-item-action">01.愛在西元前</a>
+                            <a href="jay02.html?songId=0202" class="list-group-item list-group-item-action">02.爸
+                                我回來了</a>
+                            <a href="jay02.html?songId=0203" class="list-group-item list-group-item-action">03.簡單愛</a>
+                            <a href="jay02.html?songId=0204" class="list-group-item list-group-item-action">04.忍者</a>
+                            <a href="jay02.html?songId=0205" class="list-group-item list-group-item-action">05.開不了口</a>
+                            <a href="jay02.html?songId=0206" class="list-group-item list-group-item-action">06.上海
+                                一九四三</a>
+                            <a href="jay02.html?songId=0207" class="list-group-item list-group-item-action">07.對不起</a>
+                            <a href="jay02.html?songId=0208" class="list-group-item list-group-item-action">08.威廉古堡</a>
+                            <a href="jay02.html?songId=0209" class="list-group-item list-group-item-action">09.雙截棍</a>
+                            <a href="jay02.html?songId=0210" class="list-group-item list-group-item-action">10.安靜</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card">
+                    <img src="./JayChou/03_八度空間/03_八度空間.jpg" class="card-img-top" alt="八度空間">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">八度空間</h3>
+                        <div class="list-group">
+                            <a href="jay03.html?songId=0301" class="list-group-item list-group-item-action">01.半獸人</a>
+                            <a href="jay03.html?songId=0302" class="list-group-item list-group-item-action">02.半島鐵盒</a>
+                            <a href="jay03.html?songId=0303" class="list-group-item list-group-item-action">03.暗號</a>
+                            <a href="jay03.html?songId=0304" class="list-group-item list-group-item-action">04.龍拳</a>
+                            <a href="jay03.html?songId=0305" class="list-group-item list-group-item-action">05.火車叨位去</a>
+                            <a href="jay03.html?songId=0306" class="list-group-item list-group-item-action">06.分裂</a>
+                            <a href="jay03.html?songId=0307" class="list-group-item list-group-item-action">07.爺爺泡的茶</a>
+                            <a href="jay03.html?songId=0308" class="list-group-item list-group-item-action">08.回到過去</a>
+                            <a href="jay03.html?songId=0309"
+                                class="list-group-item list-group-item-action">09.米蘭的小鐵匠</a>
+                            <a href="jay03.html?songId=0310" class="list-group-item list-group-item-action">10.最後的戰役</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card">
+                    <img src="./JayChou/04_葉惠美/04_葉惠美.jpg" class="card-img-top" alt="葉惠美">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">葉惠美</h3>
+                        <div class="list-group">
+                            <a href="jay04.html?songId=0401" class="list-group-item list-group-item-action">01.以父之名</a>
+                            <a href="jay04.html?songId=0402" class="list-group-item list-group-item-action">02.懦夫</a>
+                            <a href="jay04.html?songId=0403" class="list-group-item list-group-item-action">03.晴天</a>
+                            <a href="jay04.html?songId=0404" class="list-group-item list-group-item-action">04.三年二班</a>
+                            <a href="jay04.html?songId=0405" class="list-group-item list-group-item-action">05.東風破</a>
+                            <a href="jay04.html?songId=0406" class="list-group-item list-group-item-action">06.妳聽得到</a>
+                            <a href="jay04.html?songId=0407" class="list-group-item list-group-item-action">07.同一種調調</a>
+                            <a href="jay04.html?songId=0408" class="list-group-item list-group-item-action">08.她的睫毛</a>
+                            <a href="jay04.html?songId=0409" class="list-group-item list-group-item-action">09.愛情懸崖</a>
+                            <a href="jay04.html?songId=0410" class="list-group-item list-group-item-action">10.梯田</a>
+                            <a href="jay04.html?songId=0411" class="list-group-item list-group-item-action">11.雙刀</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card">
+                    <img src="./JayChou/04EP_尋找周杰倫/04EP_尋找周杰倫.jpg" class="card-img-top" alt="尋找周杰倫">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">尋找周杰倫</h3>
+                        <div class="list-group">
+                            <a href="jay04ep.html?songId=04ep01"
+                                class="list-group-item list-group-item-action">01.軌跡</a>
+                            <a href="jay04ep.html?songId=04ep02"
+                                class="list-group-item list-group-item-action">02.斷了的弦</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card">
+                    <img src="./JayChou/05_七里香/05_七里香.jpg" class="card-img-top" alt="七里香">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">七里香</h3>
+                        <div class="list-group">
+                            <a href="jay05.html?songId=0501" class="list-group-item list-group-item-action">01.我的地盤</a>
+                            <a href="jay05.html?songId=0502" class="list-group-item list-group-item-action">02.七里香</a>
+                            <a href="jay05.html?songId=0503" class="list-group-item list-group-item-action">03.藉口</a>
+                            <a href="jay05.html?songId=0504" class="list-group-item list-group-item-action">04.外婆</a>
+                            <a href="jay05.html?songId=0505" class="list-group-item list-group-item-action">05.將軍</a>
+                            <a href="jay05.html?songId=0506" class="list-group-item list-group-item-action">06.擱淺</a>
+                            <a href="jay05.html?songId=0507" class="list-group-item list-group-item-action">07.亂舞春秋</a>
+                            <a href="jay05.html?songId=0508" class="list-group-item list-group-item-action">08.困獸之鬥</a>
+                            <a href="jay05.html?songId=0509" class="list-group-item list-group-item-action">09.園遊會</a>
+                            <a href="jay05.html?songId=0510" class="list-group-item list-group-item-action">10.止戰之殤</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card">
+                    <img src="./JayChou/06_11月的蕭邦/06_11月的蕭邦.jpg" class="card-img-top" alt="11月的蕭邦">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">11月的蕭邦</h3>
+                        <div class="list-group">
+                            <a href="jay06.html?songId=0601" class="list-group-item list-group-item-action">01.夜曲</a>
+                            <a href="jay06.html?songId=0602" class="list-group-item list-group-item-action">02.藍色風暴</a>
+                            <a href="jay06.html?songId=0603" class="list-group-item list-group-item-action">03.髮如雪</a>
+                            <a href="jay06.html?songId=0604" class="list-group-item list-group-item-action">04.黑色毛衣</a>
+                            <a href="jay06.html?songId=0605" class="list-group-item list-group-item-action">05.四面楚歌</a>
+                            <a href="jay06.html?songId=0606" class="list-group-item list-group-item-action">06.楓</a>
+                            <a href="jay06.html?songId=0607" class="list-group-item list-group-item-action">07.浪漫手機</a>
+                            <a href="jay06.html?songId=0608" class="list-group-item list-group-item-action">08.逆鱗</a>
+                            <a href="jay06.html?songId=0609" class="list-group-item list-group-item-action">09.麥芽糖</a>
+                            <a href="jay06.html?songId=0610" class="list-group-item list-group-item-action">10.珊瑚海</a>
+                            <a href="jay06.html?songId=0611" class="list-group-item list-group-item-action">11.飄移</a>
+                            <a href="jay06.html?songId=0612" class="list-group-item list-group-item-action">12.一路向北</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card">
+                    <img src="./JayChou/07_依然范特西/07_依然范特西.jpg" class="card-img-top" alt="依然范特西">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">依然范特西</h3>
+                        <div class="list-group">
+                            <a href="jay07.html?songId=0701" class="list-group-item list-group-item-action">01.夜的第七章</a>
+                            <a href="jay07.html?songId=0702" class="list-group-item list-group-item-action">02.聽媽媽的話</a>
+                            <a href="jay07.html?songId=0703" class="list-group-item list-group-item-action">03.千里之外</a>
+                            <a href="jay07.html?songId=0704" class="list-group-item list-group-item-action">04.本草綱目</a>
+                            <a href="jay07.html?songId=0705" class="list-group-item list-group-item-action">05.退後</a>
+                            <a href="jay07.html?songId=0706" class="list-group-item list-group-item-action">06.紅模仿</a>
+                            <a href="jay07.html?songId=0707" class="list-group-item list-group-item-action">07.心雨</a>
+                            <a href="jay07.html?songId=0708" class="list-group-item list-group-item-action">08.白色風車</a>
+                            <a href="jay07.html?songId=0709" class="list-group-item list-group-item-action">09.迷迭香</a>
+                            <a href="jay07.html?songId=0710" class="list-group-item list-group-item-action">10.菊花台</a>
+                            <a href="jay07.html?songId=0711" class="list-group-item list-group-item-action">11.霍元甲</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card">
+                    <img src="./JayChou/08_我很忙/08_我很忙.jpg" class="card-img-top" alt="我很忙">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">我很忙</h3>
+                        <div class="list-group">
+                            <a href="jay08.html?songId=0801" class="list-group-item list-group-item-action">01.牛仔很忙</a>
+                            <a href="jay08.html?songId=0802" class="list-group-item list-group-item-action">02.彩虹</a>
+                            <a href="jay08.html?songId=0803" class="list-group-item list-group-item-action">03.青花瓷</a>
+                            <a href="jay08.html?songId=0804" class="list-group-item list-group-item-action">04.陽光宅男</a>
+                            <a href="jay08.html?songId=0805"
+                                class="list-group-item list-group-item-action">05.蒲公英的約定</a>
+                            <a href="jay08.html?songId=0806" class="list-group-item list-group-item-action">06.無雙</a>
+                            <a href="jay08.html?songId=0807" class="list-group-item list-group-item-action">07.我不配</a>
+                            <a href="jay08.html?songId=0808" class="list-group-item list-group-item-action">08.扯</a>
+                            <a href="jay08.html?songId=0809" class="list-group-item list-group-item-action">09.甜甜的</a>
+                            <a href="jay08.html?songId=0810" class="list-group-item list-group-item-action">10.最長的電影</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card">
+                    <img src="./JayChou/09_魔杰座/09_魔杰座.jpg" class="card-img-top" alt="魔杰座">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">魔杰座</h3>
+                        <div class="list-group">
+                            <a href="jay09.html?songId=0901" class="list-group-item list-group-item-action">01.龍戰騎士</a>
+                            <a href="jay09.html?songId=0902"
+                                class="list-group-item list-group-item-action">02.給我一首歌的時間</a>
+                            <a href="jay09.html?songId=0903" class="list-group-item list-group-item-action">03.蛇舞</a>
+                            <a href="jay09.html?songId=0904" class="list-group-item list-group-item-action">04.花海</a>
+                            <a href="jay09.html?songId=0905" class="list-group-item list-group-item-action">05.魔術先生</a>
+                            <a href="jay09.html?songId=0906"
+                                class="list-group-item list-group-item-action">06.說好的幸福呢</a>
+                            <a href="jay09.html?songId=0907" class="list-group-item list-group-item-action">07.蘭亭序</a>
+                            <a href="jay09.html?songId=0908" class="list-group-item list-group-item-action">08.流浪詩人</a>
+                            <a href="jay09.html?songId=0909" class="list-group-item list-group-item-action">09.時光機</a>
+                            <a href="jay09.html?songId=0910" class="list-group-item list-group-item-action">10.喬克叔叔</a>
+                            <a href="jay09.html?songId=0901" class="list-group-item list-group-item-action">11.稻香</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card">
+                    <img src="./JayChou/10_跨時代/10_跨時代.jpg" class="card-img-top" alt="跨時代">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">跨時代</h3>
+                        <div class="list-group">
+                            <a href="jay10.html?songId=1001" class="list-group-item list-group-item-action">01.跨時代</a>
+                            <a href="jay10.html?songId=1002" class="list-group-item list-group-item-action">02.說了再見</a>
+                            <a href="jay10.html?songId=1003" class="list-group-item list-group-item-action">03.煙花易冷</a>
+                            <a href="jay10.html?songId=1004"
+                                class="list-group-item list-group-item-action">04.免費教學錄影帶</a>
+                            <a href="jay10.html?songId=1005" class="list-group-item list-group-item-action">05.好久不見</a>
+                            <a href="jay10.html?songId=1006" class="list-group-item list-group-item-action">06.雨下一整晚</a>
+                            <a href="jay10.html?songId=1007" class="list-group-item list-group-item-action">07.嘻哈空姐</a>
+                            <a href="jay10.html?songId=1008"
+                                class="list-group-item list-group-item-action">08.我落淚 情緒零碎</a>
+                            <a href="jay10.html?songId=1009"
+                                class="list-group-item list-group-item-action">09.愛的飛行日記</a>
+                            <a href="jay10.html?songId=1010" class="list-group-item list-group-item-action">10.自導自演</a>
+                            <a href="jay10.html?songId=1011" class="list-group-item list-group-item-action">11.超人不會飛</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card">
+                    <img src="./JayChou/11_驚嘆號/11_驚嘆號.jpg" class="card-img-top" alt="驚嘆號">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">驚嘆號</h3>
+                        <div class="list-group">
+                            <a href="jay11.html?songId=1101" class="list-group-item list-group-item-action">01.驚嘆號</a>
+                            <a href="jay11.html?songId=1102" class="list-group-item list-group-item-action">02.迷魂曲</a>
+                            <a href="jay11.html?songId=1103" class="list-group-item list-group-item-action">03.Mine
+                                Mine</a>
+                            <a href="jay11.html?songId=1104" class="list-group-item list-group-item-action">04.公主病</a>
+                            <a href="jay11.html?songId=1105" class="list-group-item list-group-item-action">05.你好嗎</a>
+                            <a href="jay11.html?songId=1106" class="list-group-item list-group-item-action">06.療傷燒肉粽</a>
+                            <a href="jay11.html?songId=1107" class="list-group-item list-group-item-action">07.琴傷</a>
+                            <a href="jay11.html?songId=1108" class="list-group-item list-group-item-action">08.水手怕水</a>
+                            <a href="jay11.html?songId=1109" class="list-group-item list-group-item-action">09.世界未末日</a>
+                            <a href="jay11.html?songId=1110" class="list-group-item list-group-item-action">10.皮影戲</a>
+                            <a href="jay11.html?songId=1111" class="list-group-item list-group-item-action">11.超跑女神</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card">
+                    <img src="./JayChou/12_十二新作/12_十二新作.png" class="card-img-top" alt="12新作">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">12新作</h3>
+                        <div class="list-group">
+                            <a href="jay12.html?songId=1201" class="list-group-item list-group-item-action">01.四季列車</a>
+                            <a href="jay12.html?songId=1202" class="list-group-item list-group-item-action">02.手語</a>
+                            <a href="jay12.html?songId=1203" class="list-group-item list-group-item-action">03.公公偏頭痛</a>
+                            <a href="jay12.html?songId=1204" class="list-group-item list-group-item-action">04.明明就</a>
+                            <a href="jay12.html?songId=1205" class="list-group-item list-group-item-action">05.傻笑</a>
+                            <a href="jay12.html?songId=1206"
+                                class="list-group-item list-group-item-action">06.比較大的大提琴</a>
+                            <a href="jay12.html?songId=1207" class="list-group-item list-group-item-action">07.愛你沒差</a>
+                            <a href="jay12.html?songId=1208" class="list-group-item list-group-item-action">08.紅塵客棧</a>
+                            <a href="jay12.html?songId=1209" class="list-group-item list-group-item-action">09.夢想啟動</a>
+                            <a href="jay12.html?songId=1210" class="list-group-item list-group-item-action">10.大笨鐘</a>
+                            <a href="jay12.html?songId=1211" class="list-group-item list-group-item-action">11.哪裡都是你</a>
+                            <a href="jay12.html?songId=1212" class="list-group-item list-group-item-action">12.烏克麗麗</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card">
+                    <img src="./JayChou/13_哎呦，不錯哦/13_哎呦，不錯哦.png" class="card-img-top" alt="哎呦，不錯哦">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">哎呦，不錯哦</h3>
+                        <div class="list-group">
+                            <a href="jay13.html?songId=1301" class="list-group-item list-group-item-action">01.陽明山</a>
+                            <a href="jay13.html?songId=1302" class="list-group-item list-group-item-action">02.竊愛</a>
+                            <a href="jay13.html?songId=1303" class="list-group-item list-group-item-action">03.算什麼男人</a>
+                            <a href="jay13.html?songId=1304" class="list-group-item list-group-item-action">04.天涯過客</a>
+                            <a href="jay13.html?songId=1305" class="list-group-item list-group-item-action">05.怎麼了</a>
+                            <a href="jay13.html?songId=1306"
+                                class="list-group-item list-group-item-action">06.一口氣全唸對</a>
+                            <a href="jay13.html?songId=1307" class="list-group-item list-group-item-action">07.我要夏天</a>
+                            <a href="jay13.html?songId=1308" class="list-group-item list-group-item-action">08.手寫的從前</a>
+                            <a href="jay13.html?songId=1309" class="list-group-item list-group-item-action">09.鞋子特大號</a>
+                            <a href="jay13.html?songId=1310" class="list-group-item list-group-item-action">10.聽爸爸的話</a>
+                            <a href="jay13.html?songId=1311" class="list-group-item list-group-item-action">11.美人魚</a>
+                            <a href="jay13.html?songId=1312"
+                                class="list-group-item list-group-item-action">12.聽見下雨的聲音</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card">
+                    <img src="./JayChou/14_周杰倫的床邊故事/14_周杰倫的床邊故事.png" class="card-img-top" alt="周杰倫的床邊故事">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">周杰倫的床邊故事</h3>
+                        <div class="list-group">
+                            <a href="jay14.html?songId=1401" class="list-group-item list-group-item-action">01.床邊故事</a>
+                            <a href="jay14.html?songId=1402" class="list-group-item list-group-item-action">02.說走就走</a>
+                            <a href="jay14.html?songId=1403" class="list-group-item list-group-item-action">03.一點點</a>
+                            <a href="jay14.html?songId=1404" class="list-group-item list-group-item-action">04.前世情人</a>
+                            <a href="jay14.html?songId=1405" class="list-group-item list-group-item-action">05.英雄</a>
+                            <a href="jay14.html?songId=1406" class="list-group-item list-group-item-action">06.不該</a>
+                            <a href="jay14.html?songId=1407"
+                                class="list-group-item list-group-item-action">07.土耳其冰淇淋</a>
+                            <a href="jay14.html?songId=1408" class="list-group-item list-group-item-action">08.告白氣球</a>
+                            <a href="jay14.html?songId=1409" class="list-group-item list-group-item-action">09.Now You
+                                See Me</a>
+                            <a href="jay14.html?songId=1410" class="list-group-item list-group-item-action">10.愛情廢柴</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card">
+                    <img src="./JayChou/15_最偉大的作品/15_最偉大的作品.jpg" class="card-img-top" alt="最偉大的作品">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">最偉大的作品</h3>
+                        <div class="list-group">
+                            <a href="jay15.html?songId=1501" class="list-group-item list-group-item-action">01.Intro</a>
+                            <a href="jay15.html?songId=1502"
+                                class="list-group-item list-group-item-action">02.最偉大的作品</a>
+                            <a href="jay15.html?songId=1503" class="list-group-item list-group-item-action">03.還在流浪</a>
+                            <a href="jay15.html?songId=1504" class="list-group-item list-group-item-action">04.說好不哭</a>
+                            <a href="jay15.html?songId=1505" class="list-group-item list-group-item-action">05.紅顏如霜</a>
+                            <a href="jay15.html?songId=1506"
+                                class="list-group-item list-group-item-action">06.不愛我就拉倒</a>
+                            <a href="jay15.html?songId=1507"
+                                class="list-group-item list-group-item-action">07.Mojito</a>
+                            <a href="jay15.html?songId=1508" class="list-group-item list-group-item-action">08.錯過的煙火</a>
+                            <a href="jay15.html?songId=1509" class="list-group-item list-group-item-action">09.等你下課</a>
+                            <a href="jay15.html?songId=1510" class="list-group-item list-group-item-action">10.粉色海洋</a>
+                            <a href="jay15.html?songId=1511" class="list-group-item list-group-item-action">11.倒影</a>
+                            <a href="jay15.html?songId=1512"
+                                class="list-group-item list-group-item-action">12.我是如此相信</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- 回到頂部按鈕 -->
+    <button onclick="scrollToTop()" id="scrollTopBtn" class="btn position-fixed bottom-0 end-0 m-4"
+        style="display: none; z-index: 999; background-color: #000; color: #fff; border: none; padding: 1px 1px;  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); font-size: 10px; opacity: 0.6;">
+        <i class="bi bi-arrow-up-circle" style="color: #fff;"></i>
+    </button>
+
+    <script>
+        // 監聽滾動事件，控制按鈕顯示與否
+        window.onscroll = function () {
+            let btn = document.getElementById("scrollTopBtn");
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+
+        // 點擊按鈕時滾回頂部
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <script src="./test.js"></script>
+</body>
+
+</html>

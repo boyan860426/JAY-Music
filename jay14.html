@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="./JayChou/img/J-icon.png" type="image/png">
+    <title>老周寶-周杰倫的床邊故事</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        .custom-navbar {
+            background-color: black;
+            padding: 5px 5px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .custom-navbar .navbar-brand img {
+            height: 60px;
+        }
+
+        .custom-navbar .nav-link {
+            color: white;
+            font-size: 20px;
+            margin-right: 15px;
+        }
+
+        .custom-navbar .nav-link:hover {
+            color: #9D9D9D;
+        }
+
+        i {
+            color: white;
+            padding: 20px;
+            font-size: 30px;
+        }
+
+        .bi-youtube:hover {
+            color: red;
+        }
+
+        .bi-instagram:hover {
+            color: #FF359A;
+        }
+
+        .bi-facebook:hover {
+            color: #0072E3;
+        }
+
+        .carousel-container {
+            width: 80%;
+            /* 設定寬度 */
+            max-width: 950px;
+            /* 避免過寬 */
+            padding: 10px;
+            /* 內邊距，讓框框內的內容不貼邊 */
+            border: 2px solid gray;
+            /* 外框顏色 */
+            border-radius: 10px;
+            /* 圓角 */
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+            /* 添加陰影 */
+            background-color: white;
+            /* 設定背景色 */
+        }
+
+        .carousel-inner img {
+            height: 700px;
+            /* 設定統一高度 */
+            object-fit: cover;
+            /* 確保圖片填滿不變形 */
+        }
+
+        @media (max-width: 768px) {
+            .carousel-container {
+                width: 95%;
+                /* 在小螢幕時縮小 */
+                max-width: 600px;
+            }
+
+            .carousel-inner img {
+                height: 300px;
+                /* 在手機上圖片高度縮小*/
+            }
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            /* 左右區塊分開，中間區塊居中 */
+        }
+
+        .left,
+        .center,
+        .right {
+            padding: 10px;
+            /* border: 1px solid #000; */
+        }
+
+        .left {
+            width: 30%;
+
+            /* 左邊區塊佔 30% */
+        }
+
+        .center {
+            width: 40%;
+            /* 中間區塊佔 40% */
+        }
+
+        .right {
+            width: 30%;
+            /* 右邊區塊佔 30% */
+        }
+
+        #lyrics-container {
+            text-align: center;
+            font-size: 21px;
+            line-height: 1.5;
+            cursor: pointer;
+
+        }
+
+        .lyric-line:hover {
+            background-color: #F0F0F0;
+        }
+
+        .lyric-line {
+            color: black;
+            /* transition: color 0.3s; */
+        }
+
+        .highlight {
+            color: blue;
+            font-weight: bold;
+            background-color: #F0F0F0;
+            transition: color 0.1s;
+        }
+
+        .active::before {
+            content: " ♫ ";
+        }
+
+        .search-container {
+            position: relative;
+            width: 300px;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        .results {
+            position: absolute;
+            width: 100%;
+            background: white;
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .results div {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .results div:hover {
+            background: #f0f0f0;
+        }
+
+        a {
+            color: #000;
+            text-decoration: none;
+            /* 移除底線 */
+
+        }
+
+        .songlist:hover {
+            background-color: #F0F0F0;
+        }
+
+        .lyric-line {
+            cursor: pointer;
+            transition: color 0.1s;
+        }
+
+        .active {
+            color: blue;
+            font-weight: bold;
+            background-color: #F0F0F0;
+        }
+
+        .fixed-audio-player {
+            position: fixed;
+            bottom: 0;
+            width: 50%;            
+            padding: 10px 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            max-width: 500px;
+        }
+    </style>
+
+</head>
+
+<body class="bg-light" style="padding-top: 80px;">
+
+
+
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container-fluid">
+            <!-- 左邊 Logo -->
+            <a class="navbar-brand" href="./主頁.html">
+                <img src="./JayChou/img/JaychouLogo.jpg" alt="Logo">
+            </a>
+
+            <!-- 響應式按鈕 -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- 導覽列選單 -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./關於周杰倫.html">關於周杰倫</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./專輯總覽.html">專輯總覽</a>
+                    </li>
+                </ul>
+                <div class="search-container" style="margin-right: 20px;">
+                    <input type="text" id="searchInput" placeholder="搜尋歌曲..." style="border-radius: 20px;">
+                    <div class="results" id="results"></div>
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="https://www.youtube.com/@jaychou/videos"><i class="bi bi-youtube"></i></a>
+                    <a href="https://www.instagram.com/jaychou/"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.facebook.com/jay/?locale=zh_TW"><i class="bi bi-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="left" style="margin-top: 50px;">
+            <div style="position: fixed;">
+                <img src="./JayChou/14_周杰倫的床邊故事/14_周杰倫的床邊故事.png" style="width: 200px;">
+                <h3 style="text-align: center;">周杰倫的床邊故事</h3>
+                <h6 style="text-align: center;">2016年6月24日</h6>
+                <h5 style="text-align: center;">專輯曲目</h5>
+                <ul style="list-style-type: none;">
+                    <li class="songlist"><a href="jay14.html?songId=1401">01.床邊故事</a></li>
+                    <li class="songlist"><a href="jay14.html?songId=1402">02.說走就走</a></li>
+                    <li class="songlist"><a href="jay14.html?songId=1403">03.一點點</a></li>
+                    <li class="songlist"><a href="jay14.html?songId=1404">04.前世情人</a></li>
+                    <li class="songlist"><a href="jay14.html?songId=1405">05.英雄</a></li>
+                    <li class="songlist"><a href="jay14.html?songId=1406">06.不該</a></li>
+                    <li class="songlist"><a href="jay14.html?songId=1407">07.土耳其冰淇淋</a></li>
+                    <li class="songlist"><a href="jay14.html?songId=1408">08.告白氣球</a></li>
+                    <li class="songlist"><a href="jay14.html?songId=1409">09.Now You See Me</a></li>
+                    <li class="songlist"><a href="jay14.html?songId=1410">10.愛情廢柴</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="center" style="margin-top: 80px; background-color: white">
+            <div style="text-align: center;">
+                <img src="./JayChou/14_周杰倫的床邊故事/14_周杰倫的床邊故事.png" style="width: 400px;">
+                <audio id="audio-player" controls class="fixed-audio-player">
+                    <source id="audio-source" src="" type="audio/mp3">
+                    您的瀏覽器不支援音訊播放。
+                </audio>
+                <h3 id="song-title"></h3>
+                <hr>
+            </div>
+            <div id="lyrics-container"></div>
+            <hr>
+        </div>
+        <div class="right" style="margin-top: 80px;"></div>
+    </div>
+
+
+    <script>
+
+
+
+        // 模擬歌曲資料庫
+        const songs = {
+            "1401": {
+                title: "01.床邊故事",
+                url: "./JayChou/14_周杰倫的床邊故事/01_床邊故事.mp3",
+                lyrics: `
+                    [00:00.21]作詞：方文山 ｜ 作曲：周杰倫
+                    [00:22.31]從前從前有隻貓頭鷹 牠站在屋頂
+                    [00:24.70]屋頂後面一遍森林 森林很安靜
+                    [00:27.08]安靜的鋼琴在大廳 閣樓裡 仔細聽
+                    [00:29.49]仔細聽 叮叮叮 什麼聲音
+                    [00:31.58]乖乖睡 不要怕 聽我說
+                    [00:33.97]乖乖睡 醒來就 吃蘋果
+                    [00:36.09]不睡覺 的時候 有傳說
+                    [00:38.48]會有人 咬你的 小指頭
+                    [00:40.62]這故事 繼續翻頁 再翻頁
+                    [00:43.01]你繼續 不想睡 我卻想睡
+                    [00:45.12]然後我準備 去打開衣櫃
+                    [00:47.18]去看看 躲著誰 去看看 躲著誰
+                    [00:49.26]紙上的 城堡卡片 發光的 立體呈現
+                    [00:51.58]奇幻的 床邊故事 動聽的 令人稱羨
+                    [00:53.98]場景瞬間變化 我接著又施展魔法
+                    [00:56.11]活過來說話 準備開始吧
+                    [00:57.66]等天黑 一起倒數後關上燈
+                    [01:00.85]三二一 入夢境 的繽紛
+                    [01:03.44]我們並 非正常人
+                    [01:05.52]遊戲怎麼會 照劇本 Oh
+                    [01:07.92]天黑 一起來關上燈
+                    [01:10.04]三二一 進自由 的靈魂
+                    [01:12.70]Ohohohoh oh ～come on～
+                    [01:14.82]再回童年 敲敲門
+                    [01:16.96]～ 間奏 ～
+                    [01:37.30]滴噠滴噠突然開始擺動
+                    [01:39.63]牆上老掛鐘古董油畫 出現詭異的笑容
+                    [01:41.76]好的巫婆壞掉的蘋果 願望要跟誰說
+                    [01:44.13]旋轉的 音樂盒 我豎起 耳朵聽
+                    [01:45.16]這不會 是一場 夢
+                    [01:50.20]Oh夢～ 一下子瞬間跳躍
+                    [01:58.44]我翻閱下個世界
+                    [02:02.94]滿滿都是蝴蝶 (森林滿滿蝴蝶 窗外紛飛著雪 一覺醒來旁邊躺著是誰)
+                    [02:08.81]這故事 繼續翻頁 再翻頁
+                    [02:11.20]你繼續 不想睡 我卻想睡
+                    [02:13.33]然後我準備 去打開衣櫃
+                    [02:15.41]去看看 躲著誰 去看看 躲著誰
+                    [02:17.47]紙上的 城堡卡片 發光的 立體呈現
+                    [02:19.79]奇幻的 床邊故事 動聽的 令人稱羨
+                    [02:22.19]場景瞬間變化 我接著又施展魔法
+                    [02:24.32]活過來說話 準備開始吧
+                    [02:26.19]等天黑 一起倒數後關上燈
+                    [02:29.37]三二一 入夢境 的繽紛
+                    [02:31.70]我們並 非正常人
+                    [02:33.76]遊戲怎麼會 照劇本 Oh
+                    [02:36.16]天黑 一起來關上燈
+                    [02:38.29]三二一 進自由 的靈魂
+                    [02:40.95]Ohohohoh oh ～come on～
+                    [02:43.06]再回童年 敲敲門
+                    [02:45.12]乖乖睡啊 不要害怕
+                    [02:47.51]乖乖睡醒來就吃蘋果啊
+                    [02:49.63]不睡覺啊 有傳說啊
+                    [02:52.03]會有人咬你的小指頭啊
+                    [02:53.30]等天黑 一起倒數後關上燈
+                    [02:56.49]三二一 入夢境 的繽紛
+                    [02:58.90]我們並 非正常人
+                    [03:01.01]遊戲怎麼會 照劇本 Oh
+                    [03:03.15]天黑 一起來關上燈
+                    [03:05.53]三二一 進自由 的靈魂
+                    [03:07.94]Ohohohoh oh ～come on～
+                    [03:10.33]再回童年 敲敲門
+                    [03:19.35]再回童年 敲敲門
+                    [03:28.40]再回童年 敲敲門
+                    [03:30.52]
+                `
+                     },
+
+            "1402": {
+                title: "02.說走就走",
+                url: "./JayChou/14_周杰倫的床邊故事/02_說走就走.mp3",
+                lyrics: `
+                    [00:00.21]作詞：方文山 ｜ 作曲：周杰倫
+                    [00:20.20]伸出手 搭便車
+                    [00:21.20]唱著歌 彈著斑鳩
+                    [00:22.53]不遠處沙漠 我們才剛剛經過
+                    [00:24.66]路兩旁是單調的顏色
+                    [00:26.25]卻有種遼闊的快樂
+                    [00:27.85]我還記得
+                    [00:28.60]邊走邊說邊牽著你手
+                    [00:30.45]邊彈邊唱邊微笑看我
+                    [00:32.84]你的側臉逆著光
+                    [00:33.90]背對夕陽
+                    [00:34.64]你輪廓像幅畫
+                    [00:35.43]看久會融化
+                    [00:36.97]What's up
+                    [00:37.78]開始牽掛
+                    [00:38.80]我將所有的感覺用詩寫下
+                    [00:41.15]細膩描述你的長髮
+                    [00:42.69]以及歌詞裡要對你說的話
+                    [00:45.09]當曖昧慢慢醞釀
+                    [00:47.21]心動的頻率抽象
+                    [00:49.06]我的心 只能夠
+                    [00:51.22]容納你的模樣
+                    [00:53.07]真愛讓人擁有力量
+                    [00:58.38]你我都該勇敢
+                    [01:01.04]率性放下一切別管
+                    [01:08.48]跟著我
+                    [01:09.22]對天上星星
+                    [01:10.82]喊愛你的證明
+                    [01:13.47]這就是年輕
+                    [01:14.80]該瀟灑一次的決定
+                    [01:19.53]說走就走的旅行 Oh～
+                    [01:24.84]跟著我
+                    [01:25.63]數天上星星
+                    [01:26.96]再一起等黎明
+                    [01:29.62]無邊的風景
+                    [01:31.21]風呼嘯的聲音
+                    [01:33.84]愛～
+                    [01:35.69]一路守護著約定
+                    [01:37.80]～ 間奏 ～
+                    [01:53.68]伸出 (手) 搭便 (車)
+                    [01:54.97]唱著 (歌) 彈著 (斑鳩)
+                    [01:56.04](不) 遠處沙 (漠) 我們 (才)
+                    [01:57.31]剛剛 (經過)
+                    [01:58.10](路) 兩 (旁) 是單 (調的顏色)
+                    [01:59.97]卻有 (種) 遼闊 (的) 快樂
+                    [02:01.29](我還記得)
+                    [02:02.10]邊走邊說邊牽著你手
+                    [02:04.23]邊彈邊唱邊微笑看我
+                    [02:06.35]你的側臉逆著光
+                    [02:07.35]背對夕陽
+                    [02:08.08]你輪廓像幅畫
+                    [02:08.87]看久會融化
+                    [02:10.41]What’s up
+                    [02:11.20]開始牽掛
+                    [02:12.53]我將所有的感覺用詩寫下
+                    [02:14.59]細膩描述你的長髮
+                    [02:16.12]以及歌詞裡要對你說的話
+                    [02:18.78]當曖昧慢慢醞釀
+                    [02:20.64]心動的頻率抽象
+                    [02:22.78]我的心 只能夠
+                    [02:24.63]容納你的模樣
+                    [02:26.48]真愛讓人擁有力量
+                    [02:31.99]你我都該勇敢
+                    [02:34.65]率性放下一切別管
+                    [02:42.09]跟著我
+                    [02:42.88]對天上星星
+                    [02:44.21]喊愛你的證明
+                    [02:46.86]這就是年輕
+                    [02:48.45]該瀟灑一次的決定
+                    [02:52.90]說走就走的旅行 Oh～
+                    [02:58.22]跟著我
+                    [02:59.02]數天上星星
+                    [03:00.62]再一起等黎明
+                    [03:03.27]無邊的風景
+                    [03:04.61]風呼嘯的聲音
+                    [03:07.28]愛～
+                    [03:09.41]一路守護著約定
+                    [03:11.28]～ 間奏 ～
+                    [03:32.80]跟著我
+                    [03:33.54]對天上星星
+                    [03:35.08]喊愛你的證明
+                    [03:37.74]這就是年輕
+                    [03:39.35]該瀟灑一次的決定
+                    [03:43.81]說走就走的旅行 Oh～
+                    [03:49.06]跟著我
+                    [03:49.86]數天上星星
+                    [03:51.46]再一起等黎明
+                    [03:54.12]無邊的風景
+                    [03:55.44]風呼嘯的聲音
+                    [03:58.09]愛～
+                    [04:00.23]一路守護著約定
+                    [04:02.88]    
+                ` 
+            },
+
+            "1403": {
+                title: "03.一點點",
+                url: "./JayChou/14_周杰倫的床邊故事/03_一點點.mp3",
+                lyrics: `
+                    [00:00.21]作詞：方文山 ｜ 作曲：周杰倫
+                    [00:33.17]幾次爭辯 幾次的失眠
+                    [00:38.95]而我卻 視而不見
+                    [00:43.20]從不 先說抱歉
+                    [00:47.45]工作優先 跟朋友見面
+                    [00:53.32]永遠多過給你 的時間
+                    [01:01.64]那虧欠 一直 放在心裡面
+                    [01:07.16]沒能說出口
+                    [01:11.94]你已走遠
+                    [01:14.87]抱緊你 卻抓不住
+                    [01:18.00]你的愛剩 一點點
+                    [01:21.98]那一天 你幾乎帶走我 所有 的從前
+                    [01:29.16]你說我 根本沒有因為愛你 而改變
+                    [01:36.88]我始終聽不進 你的勸
+                    [01:44.44]～ 間奏 ～
+                    [01:59.27]想吃甜點 想去電影院
+                    [02:05.00]而我卻 都嫌太遠
+                    [02:08.93]你在 委曲埋怨
+                    [02:13.44]我連生日 都忘記敷衍
+                    [02:19.29]卻只會要你乖 一點點
+                    [02:27.52]那虧欠 一直 放在心裡面
+                    [02:33.29]沒能說出口
+                    [02:38.08]你已走遠
+                    [02:40.74]抱緊你 卻抓不住
+                    [02:43.61]你的愛剩 一點點
+                    [02:47.88]那一天 你幾乎帶走我 所有 的從前
+                    [02:55.06]故事裡 不再出現與你相關 的畫面
+                    [03:02.78]一個人的幸福 怎麼編
+                    [03:09.42]面對面 淚滑落在彼此的臉 那瞬間
+                    [03:17.13]不再讓你離開 我身邊
+                    [03:25.12]
+                `
+            },
+
+            "1404": {
+                title: "04.前世情人",
+                url: "./JayChou/14_周杰倫的床邊故事/04_前世情人.mp3",
+                lyrics: `
+                    [00:00.21]作詞：黃俊郎 ｜ 作曲：周杰倫 / Hathaway
+                    [00:15.70]松鼠陪著核桃 在庭院捉迷藏
+                    [00:17.51]葡萄躲進橡木桶 釀出時光
+                    [00:19.36]夏日在玉米齒縫中遊蕩
+                    [00:21.22]我為妳準備的四季 正在生長
+                    [00:23.10]煉金師從故事煉出土壤
+                    [00:24.68]我闔上書也聞到了花香
+                    [00:26.54]草地上的妳比果實芬芳
+                    [00:28.40]妳就像天使手裡的糖
+                    [00:30.00]小男孩害羞沒想起 自己是個雕像
+                    [00:33.70]沈浸在蘆葦跟風合奏用美妙歌聲讚揚
+                    [00:37.38]世界因為妳而露出
+                    [00:38.66]陽光燦爛的 形狀
+                    [00:40.52]謝謝妳不然純真是什麼我早已經遺忘
+                    [00:43.65]什麼愛 不說 就已經存在
+                    [00:50.55]什麼愛 望著 就全都明白
+                    [00:57.75]妳笑 一點一點一滴漾開
+                    [01:02.00]一字一句 形容不來
+                    [01:05.44]是星空上的銀海
+                    [01:11.50]月暈下 的雙手
+                    [01:13.35]越來越來越來 越依靠
+                    [01:15.21]從來從來從來 不知道
+                    [01:16.80]原來原來原來 有妳很驕傲
+                    [01:19.47]小公主 過來過來過來 約定好
+                    [01:22.13]未來未來未來 的城堡
+                    [01:23.98]將來將來將來 我們一起造
+                    [01:26.04]我會 當妳晝夜騎士 烈陽的樹蔭
+                    [01:30.03]讓花朵為妳吟遊的魔術師
+                    [01:33.97]每一道有妳風景
+                    [01:36.09]幫妳按下快門的祕密情人
+                    [01:41.88]什麼愛 不說 就已經存在
+                    [01:49.05]什麼愛 望著 就全都明白
+                    [01:55.96]妳笑 一點一點一滴漾開
+                    [02:00.22]一字一句 形容不來
+                    [02:03.68]是星空上的銀海
+                    [02:10.57]～ 間奏 ～
+                    [02:24.40]我後來 會在 純白的禮堂
+                    [02:31.32]牽好久 的手 交給另個他
+                    [02:38.22]眼淚 一點一點一滴流下
+                    [02:42.48]感動 也會跟著留下
+                    [02:45.67]遠遠看著你們幸福
+                    [02:52.71]像前世我們有過的模樣
+                    [02:58.75]
+                `
+            },
+
+            "1405": {
+                title: "05.英雄",
+                url: "./JayChou/14_周杰倫的床邊故事/05_英雄.mp3",
+                lyrics: `
+                    [00:00.21]作詞：周杰倫 ｜ 作曲：周杰倫
+                    [00:32.13]人生不是一個人的遊戲
+                    [00:33.98]一起奮鬥一起超越一起殺吧sup兄弟
+                    [00:36.37]好戰好勝戰勝逆命
+                    [00:38.24]管他天賦夠不夠我們都還需要再努力
+                    [00:40.32]你的劍就是我的劍
+                    [00:42.18]艾希的箭可不可以準一點
+                    [00:44.25]你打野我來控兵線
+                    [00:46.12]不要隨便慌張的交閃現
+                    [00:48.50]旋轉跳躍你閉著眼
+                    [00:52.23]卡特轉完會讓你閉上眼
+                    [00:56.48]悟空蓋倫也轉圈圈
+                    [01:00.19]盲僧李先生一腳把你 踢回老家
+                    [01:05.25]擊殺 雙殺 三殺 Penta kill
+                    [01:09.25]扛塔 偷拆 插眼讓我傳送
+                    [01:13.25]擊殺 雙殺 三殺 Penta kill
+                    [01:17.23]迎接 勝利 最後讓我收頭
+                    [01:20.67]～ 間奏 ～
+                    [01:36.84]劍聖易大師的冥想就像緊箍咒的碎念
+                    [01:38.89]問你出門有沒有帶眼不是罵你有沒有長眼
+                    [01:40.96]皇子嘉文不就是我黃金甲那傲氣的臉
+                    [01:42.82]讓你畫面一直呈現卓別林的黑白默片
+                    [01:44.94]請不要在觀戰模式偷窺著我
+                    [01:47.06]我的專情不可能被那阿璃魅惑
+                    [01:48.92]別學我跳牛仔很忙好嗎狗頭
+                    [01:50.80]不要動不動逆風你們就２０想投
+                    [01:52.92]旋轉跳躍你閉著眼
+                    [01:56.91]卡特轉完會讓你閉上眼
+                    [02:01.17]EZ EZ 要你easy
+                    [02:04.89]小魚人再跳 我就把你 切成生魚片
+                    [02:09.66]擊殺 雙殺 三殺 Penta kill
+                    [02:13.66]扛塔 偷拆 插眼讓我傳送
+                    [02:17.64]擊殺 雙殺 三殺 Penta kill
+                    [02:21.63]迎接 勝利 最後讓我收頭
+                    [02:25.36]～ 間奏 ～
+                    [02:58.05]擊殺 雙殺 三殺 Penta kill
+                    [03:01.98]扛塔 偷拆 插眼讓我傳送
+                    [03:05.97]擊殺 雙殺 三殺 Penta kill
+                    [03:10.22]迎接 勝利 最後讓我收頭
+                    [03:13.67]
+                `
+            },
+
+            "1406": {
+                title: "06.不該",
+                url: "./JayChou/14_周杰倫的床邊故事/06_不該.mp3",
+                lyrics: `
+                    [00:00.21]作詞：方文山 ｜ 作曲：周杰倫
+                    [00:26.66]假裝我們還在 一塊
+                    [00:33.02]我真的演 不出來
+                    [00:39.40]還是不習慣你 不在
+                    [00:44.80]這身份轉變 太快
+                    [00:52.19]畫面裡不需要 旁白
+                    [00:58.56]卻誰都看 的出來
+                    [01:04.94]是我情緒湧了 上來
+                    [01:10.52]想哭卻一遍 空白
+                    [01:16.89]雪地裡相愛
+                    [01:18.22]他們說零下
+                    [01:19.54]已結晶的誓言 不會壞
+                    [01:23.28]但愛的狀態
+                    [01:24.60]卻不會永遠
+                    [01:25.93]都冰封而透明 的存在
+                    [01:29.11]輕輕飄 落下來
+                    [01:32.29]許下的夢 融化的太快
+                    [01:36.04]或許我們都 不該醒來
+                    [01:41.57]你還是住在我的回憶裡 不出來
+                    [01:47.94]讓我們微笑離開
+                    [01:50.62]讓故事 留下來
+                    [01:54.07]放手後 愛依然在
+                    [01:57.52]雪融了 就應該花開
+                    [02:01.77]緣若盡了 就不該再重來
+                    [02:07.09]你依舊住在我的回憶裡 不出來
+                    [02:13.46]我離開將你的手
+                    [02:16.12]交給下個 最愛
+                    [02:19.85]糾纏與 固執等待
+                    [02:23.06]反而是 另一種傷害
+                    [02:27.30]彼此緊握的手鬆開
+                    [02:31.03]去擁抱更多未來
+                    [02:37.13]～ 間奏 ～
+                    [02:47.49]錯過的時間怎 麼買
+                    [02:53.89]誰都付 不出來
+                    [03:00.25]或許我們學會 釋懷
+                    [03:05.59]讓過去安靜 下來
+                    [03:12.22]雪地裡相愛
+                    [03:13.29]他們說零下
+                    [03:14.62]已結晶的誓言 不會壞
+                    [03:18.61]但愛的狀態
+                    [03:19.93]卻不會永遠
+                    [03:21.00]都冰封而透明 的存在
+                    [03:24.18]輕輕飄 落下來
+                    [03:27.36]許下的夢 融化的太快
+                    [03:31.09]或許我們都 不該醒來
+                    [03:36.67]你還是住在我的回憶裡 不出來
+                    [03:43.05]讓我們微笑離開
+                    [03:45.70]讓故事 留下來
+                    [03:49.42]放手後 愛依然在
+                    [03:52.64]雪融了 就應該花開
+                    [03:56.88]緣若盡了 就不該再重來
+                    [04:02.22]你依舊住在我的回憶裡 不出來
+                    [04:08.59]我離開將你的手
+                    [04:11.51]交給下個 最愛
+                    [04:14.97]糾纏與 固執等待
+                    [04:18.14]反而是 另一種傷害
+                    [04:22.43]彼此緊握的手鬆開
+                    [04:26.13]去擁抱更多未來
+                    [04:31.45]
+                `
+            },
+
+            "1407": {
+                title: "07.土耳其冰淇淋",
+                url: "./JayChou/14_周杰倫的床邊故事/07_土耳其冰淇淋.mp3",
+                lyrics: `
+                    [00:00.21]作詞：周杰倫 ｜ 作曲：周杰倫
+                    [00:05.13](欸 要不要挑一下)
+                    [00:07.65](隨便啊)
+                    [00:25.23]土耳其冰淇淋 就像是女人的心
+                    [00:27.55]在你的面前轉來轉去 卻捉摸不定
+                    [00:29.42]這音樂跳Waacking也可以跳Locking
+                    [00:31.54]我耍你耍的就像土耳其的冰淇淋
+                    [00:33.66]幾個高級和弦 幾個切分音
+                    [00:35.79]我寫的舞曲也可以很有音樂性
+                    [00:37.85]就像賣個冰 還能秀雜技
+                    [00:39.97]你最好期許如果你跟我一樣努力
+                    [00:42.85]換個樂器就像換個兵器
+                    [00:44.66]電吉它這個時候出來幹嘛 到底？
+                    [00:46.78]你猜不透也想不到摸不著頭緒
+                    [00:48.90]我總是為了什麼出奇不意 到底？
+                    [00:51.29]誰說拍中國風
+                    [00:53.16]一定要配燈籠
+                    [00:55.28]誰說寫中國風
+                    [00:57.10]一定要商角徵羽宮
+                    [00:59.48]我乾脆自己下車
+                    [01:01.60]指揮樂壇的交通
+                    [01:03.73]管他管他什麼曲風
+                    [01:07.98]土耳其冰淇淋
+                    [01:12.24]土耳其冰淇淋
+                    [01:16.48]土耳其冰淇淋
+                    [01:20.74]土耳其冰淇淋
+                    [01:24.72]～ 間奏 ～
+                    [01:41.19]加一點 土耳其進行曲 太豐富的編曲
+                    [01:43.81]吃一口冰淇淋來融化你的傷心
+                    [01:45.87]仔細聽 幾個半音 有點拉丁 有點熱情
+                    [01:48.47]那是我想要給的驚喜
+                    [01:49.49]幾個高級和弦 幾個切分音
+                    [01:51.61]我寫的舞曲也可以很有音樂性
+                    [01:53.75]就像賣個冰 還能秀雜技
+                    [01:55.87]你最好期許如果你跟我一樣努力
+                    [01:58.54]換個樂器就像換個兵器
+                    [02:00.60]電吉它這個時候出來幹嘛 到底？
+                    [02:02.72]你猜不透也想不到摸不著頭緒
+                    [02:04.59]我總是為了什麼出奇不意 到底？
+                    [02:06.97]誰說拍中國風
+                    [02:08.86]一定要配燈籠
+                    [02:10.97]誰說寫中國風
+                    [02:13.12]一定要商角徵羽宮
+                    [02:15.26]我乾脆自己下車
+                    [02:17.40]指揮樂壇的交通
+                    [02:19.50]管他管他什麼曲風
+                    [02:23.68]土耳其冰淇淋
+                    [02:27.93]土耳其冰淇淋
+                    [02:32.18]土耳其冰淇淋
+                    [02:36.43]土耳其冰淇淋
+                    [02:40.44]～ 間奏 ～
+                    [02:53.35]土耳其冰淇淋
+                    [02:57.55]土耳其冰淇淋
+                    [03:01.79]土耳其冰淇淋
+                    [03:05.78]土耳其冰淇淋
+                    [03:07.85]
+             `
+            },
+
+            "1408": {
+                title: "08.告白氣球",
+                url: "./JayChou/14_周杰倫的床邊故事/08_告白氣球.mp3",
+                lyrics: `
+                    [00:00.21]作詞：方文山 ｜ 作曲：周杰倫
+                    [00:23.52]塞納河畔 左岸的咖啡
+                    [00:26.18]我手一杯 品嚐你的美
+                    [00:29.10]留下唇印 的嘴
+                    [00:34.15]花店玫瑰 名字寫錯 誰
+                    [00:36.80]告白氣球 風吹到 對街
+                    [00:40.00]微笑 在天上飛
+                    [00:43.97]你說 你有點難追
+                    [00:46.63]想讓 我知難而退
+                    [00:49.29]禮物 不需挑最貴
+                    [00:51.94]只要 香榭的落葉
+                    [00:54.34]喔 營造浪漫 的約會
+                    [00:57.25]不害怕 搞砸一切
+                    [00:59.90]擁有你就擁有 全世界
+                    [01:04.70]親愛的 愛上你 從那天起
+                    [01:11.08]甜蜜的 很輕易
+                    [01:15.59]親愛的 別任性 你的眼睛
+                    [01:21.73]在說 我願意
+                    [01:26.24]～ 間奏 ～
+                    [01:48.83]塞納河畔 左岸的咖啡
+                    [01:51.49]我手一杯 品嚐你的美
+                    [01:54.68]留下唇印 的嘴
+                    [01:59.48]花店玫瑰 名字寫錯誰
+                    [02:02.13]告白氣球 風吹到 對街
+                    [02:05.33]微笑 在天上飛
+                    [02:09.33]你說 你有點難追
+                    [02:11.72]想讓 我知難而退
+                    [02:14.64]禮物 不需挑最貴
+                    [02:17.30]只要 香榭的落葉
+                    [02:19.69]喔 營造浪漫 的約會
+                    [02:22.61]不害怕 搞砸一切
+                    [02:25.26]擁有你就擁有 全世界
+                    [02:30.31]親愛的 愛上你 從那天起
+                    [02:36.43]甜蜜的 很輕易
+                    [02:40.93]親愛的 別任性 你的眼睛
+                    [02:47.32]在說 我願意
+                    [02:51.58]親愛的 愛上你 戀愛日記
+                    [02:57.71]飄香水 的回憶
+                    [03:02.22]一整瓶 的夢境 全都有你
+                    [03:08.60]攪拌 在一起
+                    [03:12.84]親愛的 別任性 你的眼睛
+                    [03:21.09]在說 我願意
+                    [03:26.67]
+                `
+            },
+
+            "1409": {
+                title: "09.Now You See Me",
+                url: "./JayChou/14_周杰倫的床邊故事/09_NowYouSeeMe.mp3",
+                lyrics: `
+                    [00:00.21]作詞：方文山 ｜ 作曲：周杰倫
+                    [00:20.20]我的幻術是超能力
+                    [00:21.79]我天生神力
+                    [00:22.79]你的魔術要靠道具
+                    [00:24.32]還真不給力
+                    [00:25.39]你話術耍耍嘴皮
+                    [00:26.39]聲東擊西
+                    [00:26.93]分散注意
+                    [00:27.98]我根本不理
+                    [00:28.73]省點力氣
+                    [00:29.26]你還真有耐性
+                    [00:30.85]啊玩一玩紙牌
+                    [00:32.11]消失了錢幣
+                    [00:33.43]手裡變出白鴿都是小朋友的把戲
+                    [00:36.10]猜你應該使用了障眼的把戲
+                    [00:38.16]不然你看一看你旁邊的觀眾他們都跑到哪去
+                    [00:41.82]出神入化
+                    [00:43.15]浪跡天涯
+                    [00:44.47]認真起來我連我自己都害怕
+                    [00:46.35]Now you see me cuz I let it be
+                    [00:49.00]Wanna find the key you gotta follow my beat
+                    [00:51.60]Now you see me cuz I let it be
+                    [00:54.25]我的幻術存在但看不見證據
+                    [00:56.64]Now you see me cuz I let it be
+                    [00:59.29]Wanna find the key you gotta follow my beat
+                    [01:01.95]Now you see me cuz I let it be
+                    [01:04.35]我的幻術讓你沈迷
+                    [01:06.96]One two three four
+                    [01:08.29]One two three four
+                    [01:09.61]倒數計時 睜開眼 置身在不同的城市
+                    [01:12.27]One more two more
+                    [01:13.60]One more two more
+                    [01:14.62]你看不見我 看不見我
+                    [01:15.95]看不見我 看不見我
+                    [01:17.27]看不見我
+                    [01:18.34]難度就像烏龜翻跟斗
+                    [01:19.93]看不見我
+                    [01:20.72]你就是扶不起的阿斗
+                    [01:22.59]看不見我
+                    [01:23.39]不然你早已跟我握手
+                    [01:24.98]看不見我
+                    [01:25.78]萬一看見的人是隻小狗
+                    [01:28.38]出神入化
+                    [01:29.71]霧裡看花
+                    [01:31.03]跟我拼命你會輸掉所有籌碼
+                    [01:33.42]出神入化
+                    [01:34.74]浪跡天涯
+                    [01:36.07]認真起來我連我自己都害怕
+                    [01:37.94]Now you see me cuz I let it be
+                    [01:40.59]Wanna find the key you gotta follow my beat
+                    [01:43.24]Now you see me cuz I let it be
+                    [01:45.64]我的幻術存在但看不見證據
+                    [01:48.30]Now you see me cuz I let it be
+                    [01:50.96]Wanna find the key you gotta follow my beat
+                    [01:53.62]Now you see me cuz I let it be
+                    [01:56.02]我的幻術讓你沈迷看穿你
+                    [01:58.69]
+                `
+            },
+
+            "1410": {
+                title: "10.愛情廢柴",
+                url: "./JayChou/14_周杰倫的床邊故事/10_愛情廢柴.mp3",
+                lyrics: `
+                    [00:00.21]作詞：周杰倫 ｜ 作曲：周杰倫
+                    [00:15.12]聖誕節 剩下單人的剩單節
+                    [00:18.25]過條街 最好又給我下起雪
+                    [00:21.43]這麼衰 這麼剛好 這麼狼狽
+                    [00:24.89]要不要拍成MV乾脆
+                    [00:28.86]淡淡憂傷還是最美 劇情是你在寫
+                    [00:37.37]有點無解 我們之間
+                    [00:40.84]踏著雪 不知不覺走了很遠
+                    [00:44.03]繞著圈 我叛逆點起一根煙
+                    [00:47.48]一整天 我旋律哼了一千遍
+                    [00:50.93]千遍一律我不醉不歸
+                    [00:54.66]沒有你的冬天 我會一直唱著唱著
+                    [01:02.90]直到你出現
+                    [01:04.74]為你封麥 只唱你愛
+                    [01:11.32]Goodbye Don’t Cry 哭個痛快
+                    [01:17.70]曲終人散 你也走散
+                    [01:24.32]我承認我是愛情裡的廢柴
+                    [01:30.73]你的離開 喊得太快
+                    [01:37.38]我的依賴 還在耍賴
+                    [01:43.76]眼淚打轉 轉不回來
+                    [01:49.35]你的笑容燦爛
+                    [01:58.65]踏著雪 不知不覺走了很遠
+                    [02:01.85]繞著圈 我叛逆點起一根煙
+                    [02:05.30]一整天 我旋律哼了一千遍
+                    [02:08.76]千遍一律我不醉不歸
+                    [02:12.50]沒有你的冬天 我會一直唱著唱著
+                    [02:20.48]直到你出現
+                    [02:22.60]為你封麥 只唱你愛
+                    [02:29.24]Goodbye Don’t Cry 哭個痛快
+                    [02:35.61]曲終人散 你也走散
+                    [02:41.99]我承認我是愛情裡的廢柴
+                    [02:48.63]你的離開 喊得太快
+                    [02:55.00]我的依賴 還在耍賴
+                    [03:01.40]眼淚打轉 轉不回來
+                    [03:07.25]你的笑容燦爛
+                    [03:09.59]～ 間奏 ～
+                    [03:34.00]為你封麥 只唱你愛
+                    [03:40.32]Goodbye Don’t Cry 哭個痛快
+                    [03:46.70]曲終人散 你也走散
+                    [03:53.33]我承認我是愛情裡的廢柴
+                    [03:59.72]你的離開 喊得太快
+                    [04:06.37]我的依賴 還在耍賴
+                    [04:12.74]眼淚打轉 轉不回來
+                    [04:18.32]你的笑容燦爛
+                    [04:22.85]
+                `
+            }
+        };
+
+        // 取得網址參數
+        const params = new URLSearchParams(window.location.search);
+        const songId = params.get("songId");
+        const audioPlayer = document.getElementById("audio-player");
+        const lyricsContainer = document.getElementById("lyrics-container");
+
+        if (songId && songs[songId]) {
+            document.getElementById("song-title").textContent = songs[songId].title;
+            document.getElementById("audio-source").src = songs[songId].url;
+            document.getElementById("audio-player").load(); // 重新載入音樂
+
+            // 解析 LRC 歌詞
+            const lyricsText = songs[songId].lyrics.trim();
+            const lyricsArray = parseLRC(lyricsText);
+
+            // 顯示歌詞
+            lyricsArray.forEach((line, index) => {
+                const lyricLine = document.createElement("p");
+                lyricLine.textContent = line.text;
+                lyricLine.classList.add("lyric-line");
+                lyricLine.setAttribute("data-time", line.time); // 記錄時間
+
+                // 點擊歌詞跳轉 & 自動播放
+                lyricLine.onclick = () => {
+                    const targetTime = line.time; // 記錄要跳轉的時間
+                    audioPlayer.removeEventListener("timeupdate", onTimeUpdate); // 先停用時間監聽
+
+                    audioPlayer.currentTime = targetTime; // 直接設定時間
+                    updateLyricsHighlight(targetTime, lyricsArray); // 立即手動更新歌詞
+
+                    if (audioPlayer.paused) {
+                        audioPlayer.play(); // 如果音樂暫停，則播放
+                    }
+
+                    // 強制延遲 700ms 再恢復 `timeupdate` 監聽
+                    setTimeout(() => {
+                        audioPlayer.addEventListener("timeupdate", onTimeUpdate);
+                    }, 700);
+                };
+
+                lyricsContainer.appendChild(lyricLine);
+            });
+
+            // 監聽音樂時間，動態高亮顯示歌詞
+            audioPlayer.addEventListener("timeupdate", () => {
+                updateLyricsHighlight(audioPlayer.currentTime, lyricsArray);
+            });
+        } else {
+            document.body.innerHTML = "<h1>歌曲不存在</h1>";
+        }
+
+        // 解析 LRC 歌詞函數
+        function parseLRC(lrc) {
+            const lines = lrc.split("\n");
+            const lyricsArray = [];
+
+            lines.forEach(line => {
+                const match = line.match(/\[(\d+):(\d+\.\d+)\](.*)/);
+                if (match) {
+                    const minutes = parseInt(match[1]);
+                    const seconds = parseFloat(match[2]);
+                    const time = minutes * 60 + seconds; // 轉換成秒
+                    const text = match[3].trim(); // 歌詞文字
+                    lyricsArray.push({ time, text });
+                }
+            });
+
+            return lyricsArray;
+        }
+
+        // 更新歌詞高亮
+        function updateLyricsHighlight(currentTime, lyricsArray) {
+            let activeIndex = -1;
+
+            // 找出最接近當前時間的歌詞
+            for (let i = 0; i < lyricsArray.length; i++) {
+                if (currentTime >= lyricsArray[i].time - 0.2) { // 多加 0.2 秒的誤差容忍
+                    activeIndex = i;
+                } else {
+                    break;
+                }
+            }
+
+            // 更新高亮顯示
+            document.querySelectorAll(".lyric-line").forEach((line, index) => {
+                if (index === activeIndex) {
+                    line.classList.add("active");
+                } else {
+                    line.classList.remove("active");
+                }
+            });
+        }
+
+        function onTimeUpdate() {
+            updateLyricsHighlight(audioPlayer.currentTime, lyricsArray);
+        }
+
+        audioPlayer.addEventListener("timeupdate", onTimeUpdate);
+
+        // 監聽歌曲播放結束事件，清除所有高亮歌詞
+        audioPlayer.addEventListener("ended", () => {
+            document.querySelectorAll(".lyric-line").forEach(line => {
+                line.classList.remove("active"); // 移除所有高亮
+            });
+        });
+    </script>
+
+    <!-- 回到頂部按鈕 -->
+    <button onclick="scrollToTop()" id="scrollTopBtn" class="btn position-fixed bottom-0 end-0 m-4"
+        style="display: none; z-index: 999; background-color: #000; color: #fff; border: none; padding: 1px 1px;  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); font-size: 10px; opacity: 0.6;">
+        <i class="bi bi-arrow-up-circle" style="color: #fff;"></i>
+    </button>
+
+    <script>
+        // 監聽滾動事件，控制按鈕顯示與否
+        window.onscroll = function () {
+            let btn = document.getElementById("scrollTopBtn");
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+
+        // 點擊按鈕時滾回頂部
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+    <script src="./test.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
